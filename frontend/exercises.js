@@ -2,6 +2,29 @@ let global_exercises = [];
 
 let delimiter = ".......";
 
+function fileChanged()
+{
+    let file = document.getElementById("file-upload").files[0];
+    file.text().then(
+        (str) => {
+            let formdata = new FormData;
+            formdata.append("input", str);
+
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = async function() {
+                if (request.readyState == 4 && request.status == 200) {
+                    console.log(request.responseText)
+                } else if (request.readyState == 4 && request.status != 200) {
+                    console.log('ERROR: ' + request.responseText)
+                }
+            }
+            request.open("POST", "/uploadExercises");
+            request.send(formdata);
+        },
+        (str) => {console.log("There was an error: " + str);}
+    );
+}
+
 function populateExercises(exercises)
 {
     global_exercises = exercises;
