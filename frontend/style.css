@@ -1,19 +1,87 @@
+:root {
+    --footer-height: 100px;
+    --go-height: 100px;
+
+    --header-font-size: 50px;
+    --normal-font-size: 20px;
+}
+
 html {
     background-color: skyblue;
-}
-
-h1 {
-    flex: 1;
-    width: 100%;
-    text-align: center;
-    font-size: 80px;
-}
-
-body {
-    height:90%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 footer {
-    height: 10%;
-    display:block;
+    height: var(--footer-height);
+    background-color: black;
+    display: flex;
+    flex-basis: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+/* Form Style */
+
+h2 {
+    font-size: var(--header-font-size);
+}
+
+label {
+    font-size: var(--normal-font-size);
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* Class Definitions */
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    flex-basis: 100%;
+}
+
+.checkbox-col {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    outline: black 1px left;
+    height: calc(100vh - 20px - var(--footer-height) - var(--go-height));
+    margin-right: 5px;
+    background-color: white;
+}
+
+.exercise-col {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    margin-left: 5px;
+    height: calc(100vh - 20px - var(--footer-height) - var(--go-height));
+    background-color: teal;
+}
+
+.go-partition {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    background-color: purple;
+    height: var(--go-height);
+}
+
+
+.centered-col {
+    display:flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
 }
