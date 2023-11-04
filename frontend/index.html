@@ -14,7 +14,7 @@
                     <form action="" method="get" class="centered-col"></form>
                     <tr>
                         <td><label for="file-upload">Upload previous configuration file here:</label></td>
-                        <td><input type="file" id="file-upload" accept=".txt"></td>
+                        <td><input type="file" id="file-upload" onchange="fileChanged()" accept=".txt"></td>
                     </tr>
                     <tr>
                         <td><label for="number-iterations">Number of iterations per exercise:</label></td>
