@@ -27,9 +27,9 @@ class Exercise:
                     self.children[i][j] = self.children[i][j].split(",")
                   
                     if(j==0):
-                        self.children[i-1] = Exercise(readString[readString.index("{"):],1)
+                        self.children[j] = Exercise(readString[readString.index("{"):],1)
                     else:
-                        self.children[i-1] = Exercise(self.children[i][j],0,self.children[i-1].children)
+                        self.children[j] = Exercise(self.children[i][j],0,self.children[i-1].children)
         elif(ind==0):
             self.name = readString[0]
             self.children = []
@@ -56,3 +56,5 @@ class Exercise:
         
 a = Exercise("{4,1000,Jump,10{Full hop,10;Short hop,10{Fast fall,10;,10")
 b = Exercise("{1, 1, Roll, 10")
+
+print(a.children[0].name)
