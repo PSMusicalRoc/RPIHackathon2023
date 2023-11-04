@@ -4,7 +4,7 @@ Recursive brackets that contain the following format:
 {Size,TimesCalled,name,score;{mod1name,mod1score;mod2name,mod2score;{2nd layer modifiers}}}
 
 Example:
-{4,1000,Jump,10;{Full hop,10;Short hop,10;{Fast fall,10;,10}}}
+{4,1000,Jump,10{Full hop,10;Short hop,10{Fast fall,10;,10}
 
 Note: in "Fast fall,10;,10" the space between the semicolon and the comma is deliberately 
 left empty to indicate a default. The default is itself a modifier, with no name.
