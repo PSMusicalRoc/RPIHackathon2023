@@ -2,6 +2,7 @@
 <html>
     <head>
         <link href="style.css" rel="stylesheet">
+        <script src="exercises.js"></script>
         <title>Smash Bros. Training Thing</title>
         <meta charset="UTF-8">
     </head>
@@ -11,6 +12,10 @@
                 <h2 style="text-align: center;">Options</h2>
                 <table>
                     <form action="" method="get" class="centered-col"></form>
+                    <tr>
+                        <td><label for="file-upload">Upload previous configuration file here:</label></td>
+                        <td><input type="file" id="file-upload" accept=".txt"></td>
+                    </tr>
                     <tr>
                         <td><label for="number-iterations">Number of iterations per exercise:</label></td>
                         <td><input type="number" id="number-iterations" autocomplete="off"
@@ -26,33 +31,18 @@
             </div>
             <div class="exercise-col">
                 <h2 style="text-align: center;">Exercises</h2>
-                <div class="exercise">
-                    <div class="standard">
-                        <p class="name">Jump</p>
-                        <button class="edit"></button>
-                        <button class="exclude"></button>
-                        <button class="delete"></button>
-                    </div>
-                    <div class="exercise-dropdown">
-                        <p class="variation-text">Variations:</p>
-                        <p class="variation">Fast-Fall</p>
-                        <p class="variation">Short-Hop</p>
-                    </div>
-                </div>
-                <div class="exercise">
-                    <div class="standard">
-                        <p class="name">Galaxian Combo</p>
-                        <button class="edit"></button>
-                        <button class="exclude"></button>
-                        <button class="delete"></button>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="go-partition">
             <p class="centered-col" style="text-align: center; font-size: 30px;">Go!</p>
         </div>
         <footer>
+            <p>Tim Bishop, RPI Class of 2025, Frontend</p>
+            <p>TJ Hatch, RPI Class of 2026, Design</p>
+            <p>Alex Houck, RPI Class of 2024, Backend</p>
         </footer>
+        <script>
+            populateExercises(["Jump", "Test", "Test2"]);
+        </script>
     </body>
 </html>
