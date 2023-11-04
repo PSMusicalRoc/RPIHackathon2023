@@ -1,10 +1,10 @@
 Basic file structure for one drill.
 
 Recursive brackets that contain the following format:
-{Size,name,score;{mod1name,mod1score;mod2name,mod2score;{2nd layer modifiers}}}
+{Size,TimesCalled,name,score;{mod1name,mod1score;mod2name,mod2score;{2nd layer modifiers}}}
 
 Example:
-{4,Jump,10;{Full hop,10;Short hop,10;{Fast fall,10;,10}}}
+{4,1000,Jump,10;{Full hop,10;Short hop,10;{Fast fall,10;,10}}}
 
 Note: in "Fast fall,10;,10" the space between the semicolon and the comma is deliberately 
 left empty to indicate a default. The default is itself a modifier, with no name.
@@ -19,9 +19,17 @@ Size = (Size/oldLayerSize) * (oldLayerSize+1)
 Size/oldLayerSize is guaranteed to return an integer because Size is guaranteed to be a multiple of
 oldLayerSize.
 
-Cases that would render the tree imbalanced (i.e. short hop has a child and full hop does not) should
+Cases that would render the tree imbalanced (i.e. short hop has a child that full hop does not) should
 not be thought of as modifications to the base exercise and instead implemented as separate exercies.
 
 Keeping the data structured like this grants it many nice properties:
 
-- We can easily update score averages because we will 
+- We can update the average of our exercises with variable sensitivity using Size, TimesCalled, and individual exercise scores/weights to decide how much any given input should affect the total score.
+- We can update total size easily when adding a new modifier to an exercise
+- Sensitivity does not need to be affected by how deeply nested a modifier is. 
+- Each modifier's average is effectively independent of the score of the modifiers above and below it on the tree.
+- Further information can be held in the program version of the datatype that does not need to be saved to the file for runtime operations (i.e. last modifier called from this node)
+
+TODO: 
+- Develop average sensitivity equation based on score, size, etc. (Should averages be more sensitive with lower scores? Less?)
+- Define necessary runtime members for nodes on the tree
