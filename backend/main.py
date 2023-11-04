@@ -16,23 +16,29 @@ class Exercise:
     def __init__(self, readString, ind=-1, lst = []):
         b = "{"
         if(ind==-1):
+            tVar = readString.split(b)
+            self.children=[]
             readString = readString[1:]
-            self.children = readString.split(b)
-            self.children[0] = self.children[0].split(",")
-            self.size = self.children[0][0]
-            self.timesCalled = self.children[0][1]
-            self.name = self.children[0][2]
-            self.score = self.children[0][3]
-            if(len(self.children)>1):
-                i = 1;
-                self.children[i] = self.children[i].split(";")
-                for j in range(len(self.children[i])):
-                    self.children[i][j] = self.children[i][j].split(",")
-                  
+            tVar = readString.split(b)
+            tVar[0] = tVar[0].split(",")
+            self.size = tVar[0][0]
+            self.timesCalled = tVar[0][1]
+            self.name = tVar[0][2]
+            self.score = tVar[0][3]
+            
+            if(len(tVar)>1):
+                i = 1
+                tVar[i] = tVar[i].split(";")
+                for j in range(len(tVar[i])):
+                    tVar[i][j] = tVar[i][j].split(",")
+                    
+                    
                     if(j==0):
-                        self.children[j] = Exercise(readString[readString.index("{"):],1)
+                        
+                        self.children.append(Exercise(readString[readString.index("{"):],1))
                     else:
-                        self.children[j] = Exercise(self.children[i][j],0,self.children[i-1].children)
+                        self.children.append(Exercise(tVar[i][j],0,self.children[j-1].children))
+            else: self.children = []
         elif(ind==0):
             self.name = readString[0]
             self.children = []
@@ -42,22 +48,37 @@ class Exercise:
             
         else:
             readString = readString[1:]
+            
             self.children = readString.split("{")
             self.children[0] = self.children[0].split(";")
             self.children[0][0] = self.children[0][0].split(",")
             self.name = self.children[0][0][0]
             self.score = self.children[0][0][1]
+            a = []
             if(len(self.children)>1):
                 self.children[1] = self.children[1].split(";")
                 a = self.children[1].copy()
+            self.children = []
+            if(readString.find("{")):
+                
                 for i in range(0,len(a)):
                     if(i==0):
-                        self.children[i] = Exercise(readString[readString.index("{"):],1)
+                        self.children.append(Exercise(readString[readString.index("{"):],1))
                     else:
-                        self.children[i] = Exercise(a[i].split(","),0)
+                        self.children.append(Exercise(a[i].split(","),0))
                 
         
-a = Exercise("{4,1000,Jump,10{Full hop,10;Short hop,10{Fast fall,10;,10")
-b = Exercise("{1, 1, Roll, 10")
-
-print(a.children[0].name)
+with open("../data/DummyData.txt", "r") as file:
+    data = file.read().rstrip()
+data = data[:-1]
+data = data.split("}")
+a = []
+for i in data:
+    i = Exercise(i)
+    a.append(i)
+    
+for i in a:
+    while(len(i.children)>0):
+        print(i.name, len(i.children)) 
+        i = i.children[0]
+    print(i.name)

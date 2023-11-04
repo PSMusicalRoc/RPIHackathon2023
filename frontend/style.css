@@ -16,12 +16,18 @@ html {
 
 footer {
     height: var(--footer-height);
-    background-color: black;
-    display: flex;
-    flex-basis: 100%;
+    display: block;
     width: 100%;
+    flex-direction: row;
     flex-wrap: wrap;
     flex: 1;
+}
+
+footer p {
+    display: flex;
+    flex-basis: 100%;
+    width:100%;
+    margin: 4px auto;
 }
 
 /* Form Style */
@@ -49,16 +55,18 @@ input[type="checkbox"] {
 
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 10px auto;
 }
 
 .exercise .standard {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.exercise .exercise-dropdown {
+/* .exercise .exercise-dropdown {
     height: 0;
     visibility: hidden;
 }
@@ -80,7 +88,7 @@ input[type="checkbox"] {
 .exercise:hover .exercise-dropdown {
     visibility: visible;
     height: auto;
-}
+} */
 
 .exercise p.name {
     display: block;
