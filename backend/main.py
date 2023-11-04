@@ -21,7 +21,7 @@ class Exercise:
             self.name = self.children[0][2]
             self.score = self.children[0][3]
             if(len(self.children)>1):
-                i = 1;
+                i = 1
                 self.children[i] = self.children[i].split(";")
                 for j in range(len(self.children[i])):
                     self.children[i][j] = self.children[i][j].split(",")
@@ -57,4 +57,4 @@ class Exercise:
 a = Exercise("{4,1000,Jump,10{Full hop,10;Short hop,10{Fast fall,10;,10")
 b = Exercise("{1, 1, Roll, 10")
 
-print(a.children[0].name)
+print(b.name)
