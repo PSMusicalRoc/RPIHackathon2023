@@ -3,7 +3,10 @@
     --go-height: 100px;
 
     --header-font-size: 50px;
+    --exercise-font-size: 25px;
     --normal-font-size: 20px;
+
+    --exercise-object-height: 50px;
 }
 
 html {
@@ -34,6 +37,84 @@ label {
 input[type="checkbox"] {
     width: 20px;
     height: 20px;
+}
+
+/* Exercise Objects */
+
+.exercise {
+    width: 70%;
+    background-color: white;
+    height: var(--exercise-object-height);
+    outline: black 1px solid;
+
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto;
+}
+
+.exercise .standard {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.exercise .exercise-dropdown {
+    height: 0;
+    visibility: hidden;
+}
+
+.exercise .exercise-dropdown .variation-text {
+    font-size: var(--exercise-font-size);
+    font-weight: bold;
+}
+
+.exercise .exercise-dropdown .variation {
+    font-size: var(--normal-font-size);
+    font-weight: bold;
+}
+
+.exercise:hover {
+    height: auto;
+}
+
+.exercise:hover .exercise-dropdown {
+    visibility: visible;
+    height: auto;
+}
+
+.exercise p.name {
+    display: block;
+    font-size: var(--exercise-font-size);
+    margin: auto 3px;
+    font-weight: bold;
+    flex-basis: 70%;
+}
+
+.exercise button.edit {
+    display: block;
+    flex-basis: 10%;
+    background-image: url("https://static.vecteezy.com/system/resources/previews/022/448/543/original/illustration-of-colorful-pencil-with-eraser-free-png.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.exercise button.exclude {
+    display: block;
+    flex-basis: 10%;
+    background-image: url("https://static.vecteezy.com/system/resources/previews/004/791/120/non_2x/stop-sign-free-vector.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.exercise button.delete {
+    display: block;
+    flex-basis: 10%;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Red_X.svg/2048px-Red_X.svg.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 
