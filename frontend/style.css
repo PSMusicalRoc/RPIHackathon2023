@@ -1,0 +1,19 @@
+html {
+    background-color: skyblue;
+}
+
+h1 {
+    flex: 1;
+    width: 100%;
+    text-align: center;
+    font-size: 80px;
+}
+
+body {
+    height:90%;
+}
+
+footer {
+    height: 10%;
+    display:block;
+}
