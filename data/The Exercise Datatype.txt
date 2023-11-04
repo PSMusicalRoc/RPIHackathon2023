@@ -1,0 +1,27 @@
+Basic file structure for one drill.
+
+Recursive brackets that contain the following format:
+{Size,name,score;{mod1name,mod1score;mod2name,mod2score;{2nd layer modifiers}}}
+
+Example:
+{4,Jump,10;{Full hop,10;Short hop,10;{Fast fall,10;,10}}}
+
+Note: in "Fast fall,10;,10" the space between the semicolon and the comma is deliberately 
+left empty to indicate a default. The default is itself a modifier, with no name.
+
+Size follows the formula: sum(size of each of this node's children). If the node has no children, 
+it returns 1. In the above example with jump, size returns 4 because there are two children
+at the bottom layer ("Fast fall", "") and two children at the second layer ("Full hop", "Short hop"), so 
+2x2 = 4. Adding another child on any layer requires the following operation to be performed: 
+
+Size = (Size/oldLayerSize) * (oldLayerSize+1)
+
+Size/oldLayerSize is guaranteed to return an integer because Size is guaranteed to be a multiple of
+oldLayerSize.
+
+Cases that would render the tree imbalanced (i.e. short hop has a child and full hop does not) should
+not be thought of as modifications to the base exercise and instead implemented as separate exercies.
+
+Keeping the data structured like this grants it many nice properties:
+
+- We can easily update score averages because we will 
