@@ -1,19 +1,168 @@
+:root {
+    --footer-height: 100px;
+    --go-height: 100px;
+
+    --header-font-size: 50px;
+    --exercise-font-size: 25px;
+    --normal-font-size: 20px;
+
+    --exercise-object-height: 50px;
+}
+
 html {
     background-color: skyblue;
-}
-
-h1 {
-    flex: 1;
-    width: 100%;
-    text-align: center;
-    font-size: 80px;
-}
-
-body {
-    height:90%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 footer {
-    height: 10%;
-    display:block;
+    height: var(--footer-height);
+    background-color: black;
+    display: flex;
+    flex-basis: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+/* Form Style */
+
+h2 {
+    font-size: var(--header-font-size);
+}
+
+label {
+    font-size: var(--normal-font-size);
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+/* Exercise Objects */
+
+.exercise {
+    width: 70%;
+    background-color: white;
+    height: var(--exercise-object-height);
+    outline: black 1px solid;
+
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto;
+}
+
+.exercise .standard {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.exercise .exercise-dropdown {
+    height: 0;
+    visibility: hidden;
+}
+
+.exercise .exercise-dropdown .variation-text {
+    font-size: var(--exercise-font-size);
+    font-weight: bold;
+}
+
+.exercise .exercise-dropdown .variation {
+    font-size: var(--normal-font-size);
+    font-weight: bold;
+}
+
+.exercise:hover {
+    height: auto;
+}
+
+.exercise:hover .exercise-dropdown {
+    visibility: visible;
+    height: auto;
+}
+
+.exercise p.name {
+    display: block;
+    font-size: var(--exercise-font-size);
+    margin: auto 3px;
+    font-weight: bold;
+    flex-basis: 70%;
+}
+
+.exercise button.edit {
+    display: block;
+    flex-basis: 10%;
+    background-image: url("https://static.vecteezy.com/system/resources/previews/022/448/543/original/illustration-of-colorful-pencil-with-eraser-free-png.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.exercise button.exclude {
+    display: block;
+    flex-basis: 10%;
+    background-image: url("https://static.vecteezy.com/system/resources/previews/004/791/120/non_2x/stop-sign-free-vector.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.exercise button.delete {
+    display: block;
+    flex-basis: 10%;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Red_X.svg/2048px-Red_X.svg.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+/* Class Definitions */
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    flex-basis: 100%;
+}
+
+.checkbox-col {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    outline: black 1px left;
+    height: calc(100vh - 20px - var(--footer-height) - var(--go-height));
+    margin-right: 5px;
+    background-color: white;
+}
+
+.exercise-col {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    margin-left: 5px;
+    height: calc(100vh - 20px - var(--footer-height) - var(--go-height));
+    background-color: teal;
+}
+
+.go-partition {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    background-color: purple;
+    height: var(--go-height);
+}
+
+
+.centered-col {
+    display:flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
 }
