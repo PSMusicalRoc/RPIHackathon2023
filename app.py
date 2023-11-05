@@ -104,8 +104,11 @@ def getNextExercise():
         #get previous exercise
         exercise_name = request.form['this_exercise']
         exercise_score = request.form['this_score']
+        print('received:', exercise_name, "with", exercise_score)
+        if index >= no_exercises:
+            return redirect(url_for('resultsRedirect'))
         if exercise_score != '':
-            score = exercise_score/no_iterations
+            score = float(exercise_score)/float(no_iterations)
             #update this_exercise's score in the data structure
             Exercise.scoring(main_list, exercise_name, score)
         #send back string representation of exercise
@@ -121,7 +124,7 @@ def getNextExercise():
 #called when session finishes
 @app.route('/resultsRedirect/')
 def resultsRedirect():
-    return redirect(url_for('/showResults'))
+    return redirect(url_for('showResults'))
 
 #returns results information
 @app.route('/showResults/')
