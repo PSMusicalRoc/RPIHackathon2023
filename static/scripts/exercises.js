@@ -15,6 +15,14 @@ class ExerciseDataStruct {
     }
 }
 
+class ExerciseNode {
+    constructor(name, score)
+    {
+        this.name = name;
+        this.score = score;
+    }
+}
+
 function fileChanged()
 {
     let file = document.getElementById("file-upload").files[0];
@@ -104,10 +112,16 @@ function parseBackendString(str) {
             {
                 names.pop();
             }
-            inlayers.push(names);
+            let temp = [];
+            for (k = 0; k < names.length; k+=2)
+            {
+                temp.push(new ExerciseNode(names[k], names[k+1]));
+            }
+            inlayers.push(temp);
         }
+        let toplevel = layers[0].split(name_delim);
 
-        let exercise = new ExerciseDataStruct(layers[0], inlayers);
+        let exercise = new ExerciseDataStruct(new ExerciseNode(toplevel[0], toplevel[1]), inlayers);
         output.push(exercise);
     }
 
@@ -152,14 +166,19 @@ function populateExercises(input_str)
             label.innerHTML = "Layer " + (i + 1).toString();
             dropdownvis.appendChild(label);
 
-            let text = data.layers[i].join(", ");
+            let text = "";
+            for (j = 0; j < data.layers[i].length; j++)
+            {
+                if (j != 0) text += ", ";
+                text += data.layers[i][j].name + " (" + data.layers[i][j].score + ")";
+            }
             let radio = document.createElement("p");
             radio.innerHTML = text;
             dropdownvis.appendChild(radio);
         }
 
         let ename = document.createElement("p");
-        ename.innerHTML = data.name;
+        ename.innerHTML = data.name.name + " (" + data.name.score + ")";
         ename.setAttribute("class", "name");
         standardvis.appendChild(ename);
 
@@ -185,3 +204,22 @@ function populateExercises(input_str)
     }
 }
 
+function beginTraining() {
+    let number_iterations = document.getElementById("number-iterations").value;
+    let number_exercises = document.getElementById("number-exercises").value;
+
+    let formdata = new FormData();
+    formdata.set("number-iterations", number_iterations);
+    formdata.set("number-exercises", number_exercises);
+
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = async function() {
+        if (request.readyState == 4 && request.status == 200) {
+            console.log(request.responseText);
+        } else if (request.readyState == 4 && request.status != 200) {
+            console.log('ERROR: ' + request.responseText)
+        }
+    }
+    request.open("POST", "/startSession", true);
+    request.send(formdata);
+}
