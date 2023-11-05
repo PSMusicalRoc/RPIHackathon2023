@@ -308,3 +308,13 @@ input[type="file"] {
     flex-basis: 100%;
     flex: 1;
 }
+
+/* Training Page */
+
+.training-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 20px - var(--footer-height));
+    background-color: var(--page-background-color);
+}

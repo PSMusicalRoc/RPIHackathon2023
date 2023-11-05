@@ -78,7 +78,7 @@ def startSession():
         #do something with the given information
 
 
-        return redirect(url_for('/render-session/'))
+    return redirect(url_for('render_session'))
 
 @app.route('/render-session/')
 def render_session():
