@@ -1,10 +1,12 @@
 from flask import Flask, url_for, redirect, render_template, request, send_file, flash
 import os
 import shutil
+import Exercise
+
 
 this_file = __file__
 app = Flask(__name__)
-
+main_list = []
 
 #called on startup
 @app.route('/')
@@ -26,6 +28,9 @@ def downloadExercises():
     #print(f"PATH: {os.path.join(os.path.dirname(this_file), 'logfile.txt')}")
     return send_file(os.path.join(os.path.dirname(this_file), 'Exercises.txt'), as_attachment=True)
 
+
+
+
 #upload new exercises file
 @app.route('/uploadExercises/', methods = ['POST'])
 def uploadExercises():
@@ -39,9 +44,15 @@ def uploadExercises():
         shutil.copy(file.filename, os.path.join(os.path.dirname(this_file), 'static/Exercises/Exercises.txt'))
 
         outfile = open(file.filename)
-        data = outfile.readlines()
-        print(data)
+        main_list = Exercise.parse(file.filename)
+        for e in main_list:
+            print(''.join(e.toSendStringCaller()))
         #do stuff with file here...
+
+        #sending back - should be "excercise:score;exercise:score;exercise:score......"
+
+        'Jump: Full Hop Fast Fall Fair Forward 1:0.5;'
+
 
         return "obama"
 
