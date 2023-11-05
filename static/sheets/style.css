@@ -314,7 +314,17 @@ input[type="file"] {
 .training-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
     height: calc(100vh - 20px - var(--footer-height));
     background-color: var(--page-background-color);
+}
+
+#download-config-button {
+    margin: 10px auto;
+}
+
+#back-to-home {
+    font-size: var(--go-button-font-size);
+    margin: 10px auto;
 }
