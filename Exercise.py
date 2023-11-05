@@ -244,7 +244,6 @@ def select(ex):
         ex = ex.children[i]
         if(ex.name):
             st = ",".join([st,ex.name])
-    print(st)
     return st
 
 #Updates scores along a specified path in the tree.
@@ -286,7 +285,39 @@ def update(ex, exercises):
 def addExercise(exercises, a):
     exercises.append(Exercise(a,ch = ":"))
     
-            
+def getExercises(exercises, a):
+    tot = 0
+    arr = []
+    lasti = -1
+    discourage = .5
+    for i in range(a):
+        tot = 0
+        for j in range(len(exercises)):
+            x = 1
+            if(j == lasti):
+                x = discourage
+            tot += x*(1.1-exercises[j].score)
+        r = random.random()
+        r *=tot
+        b = 0
+        j = 0
+        while(b < r):
+            x = 1
+            if(j==lasti):
+                x = .5
+            b+=x*(1.1-exercises[j].score)
+            j+=1
+        j-=1
+        if(lasti==j):
+            discourage *=.5
+        else:
+            discourage = .5
+        lasti = j
+        arr.append(select(exercises[j]))
+        print(exercises[j].name, exercises[j].score)
+    print(arr)
+    return arr
+    
         
 
 a = parse("t.txt")
@@ -303,6 +334,7 @@ write("t.txt",a)
 
 addExercise(a, "Jump:Short Hop;Full Hop;:Fastfall:bo:a;Test2:Something:Nothing;Here;......")
 print(a[3].children[0].name)
+getExercises(a, 8)
 
 
         
