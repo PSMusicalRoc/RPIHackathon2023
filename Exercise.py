@@ -108,6 +108,31 @@ class Exercise:
         return l
 
 
+    def toFormatString():
+        #print all of this thing's info
+        a = "{" + string(self.timesCalled) + "," + \
+            string(self.size) + "," + self.name + \
+                "," + string(self.score)
+        if(len(a.children)>0):
+            a = a + "{"
+        #print all of its childrens' info
+            for i in range(len(self.children)):
+                a = a + self.children[i].name + "," +\
+                    self.children[i].score
+                if(i+1<len(self.children)):
+                    a = a + ";"
+                else: a = a + "{"
+            a += self.children[0].toFormatStringChild()
+        a = a + "}"
+        return a
+        
+    def toFormatStringChild():
+        if(len(a.children)>0):
+            print("a")
+        #print all of this thing's childrens' info
+        #call this for this things' children[]
+        
+
 
 #With correct input this function should always work.
 
