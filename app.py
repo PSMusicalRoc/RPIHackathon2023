@@ -106,7 +106,7 @@ def getNextExercise():
         exercise_score = request.form['this_score']
         print('received:', exercise_name, "with", exercise_score)
         if index >= no_exercises:
-            return redirect(url_for('resultsRedirect'))
+            return '......redirect......' + render_template('resultsScreen.html')
         if exercise_score != '':
             score = float(exercise_score)/float(no_iterations)
             #update this_exercise's score in the data structure
