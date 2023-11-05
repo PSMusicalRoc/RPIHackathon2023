@@ -26,6 +26,7 @@ function fileChanged()
             const request = new XMLHttpRequest();
             request.onreadystatechange = async function() {
                 if (request.readyState == 4 && request.status == 200) {
+                    global_exercises = parseBackendString(request.responseText);
                     populateExercises(request.responseText);
                 } else if (request.readyState == 4 && request.status != 200) {
                     console.log('ERROR: ' + request.responseText)
