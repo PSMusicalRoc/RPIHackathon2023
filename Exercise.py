@@ -164,6 +164,13 @@ def parse(filename):
             i = i.children[0]
     return a
 
+def write(filename, exercises):
+    a = ""
+    for i in exercises:
+        a += i.toFormatString()
+    with open(filename, "w") as file:
+        file.write(a)
+        
 
 #Tree traversal. Returns a string with the name of an exercise. 
 def select(ex):
@@ -239,8 +246,8 @@ def update(ex, exercises):
             
         
 
-"""
-a = parse("DummyData.txt")
+'''
+a = parse("t.txt")
 for i in range(2):
     select(a[0])
 select(a[1])
@@ -250,6 +257,7 @@ for i in range(20):
 print(a[0].score)
 print(a[0].toFormatString())
 print(a[0].toSendString(a[0]))
-"""
-        
+write("t.txt",a)
+'''
+
         
