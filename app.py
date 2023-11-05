@@ -110,15 +110,11 @@ def getNextExercise():
         print('received:', exercise_name, "with", exercise_score)
 
         if exercise_score != '':
-            print('updating score')
             score = float(exercise_score)/float(no_iterations)
-            print(main_list[0].score)
-            print('score:', score)
+
             #update this_exercise's score in the data structure
             Exercise.scoring(main_list, exercise_name, score)
-            main_list[0].score = 0.0
-            print(main_list[0].score)
-            print()
+
         if index >= no_exercises:
             return '......redirect......' + render_template('resultsScreen.html')
         #send back string representation of exercise
@@ -158,18 +154,29 @@ def addExercise():
         global main_list
         new_exercise = request.form['new_exercise']
 
-        #Jump:Hello;World;: is the format
+        #Jump:Hello;World is the format
 
 
         #add the exercise here
         Exercise.addExercise(main_list, new_exercise)
+        s = ''
+        for e in main_list:
+            s += e.toSendString(e) + '......'
 
-        return "String that represents the data structure for the frontend's use"
+        return s
 
 #removes an exercise
 @app.route('/removeExercise/', methods = ['POST'])
 def removeExercise():
     if request.method == 'POST':
 
+        remove_exercise = request.form['remove_exercise']
+        
+
         #remove the exercise here
-        return "String that represents the data structure for the frontend's use"
+        Exercise.remove(main_list, remove_exercise)
+        s = ''
+        for e in main_list:
+            s += e.toSendString(e) + '......'
+
+        return s
