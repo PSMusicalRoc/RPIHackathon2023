@@ -109,7 +109,7 @@ def getNextExercise():
             #update this_exercise's score in the data structure
             Exercise.scoring(main_list, exercise_name, score)
         #send back string representation of exercise
-        send = temp_list[index] + str(no_iterations)
+        send = temp_list[index] + ';' + str(no_iterations)
         index += 1
         print('send', send)
         return send
@@ -142,8 +142,15 @@ def showResults():
 def addExercise():
     if request.method == 'POST':
 
+        global main_list
+        new_exercise = request.form['new_exercise']
+
         #Jump:Hello;World;: is the format
+
+
         #add the exercise here
+        Exercise.addExercise(main_list, new_exercise)
+
         return "String that represents the data structure for the frontend's use"
 
 #removes an exercise
