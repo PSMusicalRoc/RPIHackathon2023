@@ -1,12 +1,22 @@
 :root {
     --footer-height: 100px;
+
     --go-height: 100px;
+    --go-button-height: 80px;
+    --go-button-font-size: 20px;
+    --go-button-color-background: #22853d;
+    --go-button-color-hover: #2fba55;
+    --go-button-color-active: #1c6b32;
+    --go-button-font-color: white;
+    --go-button-rounding: 15px;
 
     --header-font-size: 50px;
     --exercise-font-size: 25px;
     --normal-font-size: 20px;
 
     --exercise-object-height: 50px;
+    --exercise-object-rounding: 5px;
+    --exercise-button-size: 20px;
 }
 
 html {
@@ -52,6 +62,7 @@ input[type="checkbox"] {
     background-color: white;
     height: var(--exercise-object-height);
     outline: black 1px solid;
+    border-radius: var(--exercise-object-rounding);
 
     display: flex;
     flex-direction: column;
@@ -98,6 +109,21 @@ input[type="checkbox"] {
     flex-basis: 70%;
 }
 
+.exercise button {
+    size: var(--exercise-button-size);
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+.exercise button:hover {
+    filter: brightness(140%);
+}
+
+.exercise button:active {
+    filter: brightness(60%);
+}
+
 .exercise button.edit {
     display: block;
     flex-basis: 10%;
@@ -110,7 +136,7 @@ input[type="checkbox"] {
 .exercise button.exclude {
     display: block;
     flex-basis: 10%;
-    background-image: url("https://static.vecteezy.com/system/resources/previews/004/791/120/non_2x/stop-sign-free-vector.jpg");
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/8/81/Stop_sign.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -146,6 +172,7 @@ input[type="checkbox"] {
     height: calc(100vh - 20px - var(--footer-height) - var(--go-height));
     margin-right: 5px;
     background-color: white;
+    overflow-y: auto;
 }
 
 .exercise-col {
@@ -156,15 +183,36 @@ input[type="checkbox"] {
     margin-left: 5px;
     height: calc(100vh - 20px - var(--footer-height) - var(--go-height));
     background-color: teal;
+    overflow-y: auto;
 }
 
 .go-partition {
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
+    width: 100%;
     flex: 1;
     background-color: purple;
     height: var(--go-height);
+}
+
+.go-button {
+    background-color: var(--go-button-color-background);
+    color: var(--go-button-font-color);
+    font-size: var(--go-button-font-size);
+    height: 80px;
+    width: 300px;
+    margin: auto;
+    border: var(--go-button-font-color) 2px solid;
+    border-radius: var(--go-button-rounding);
+}
+
+.go-button:hover {
+    background-color: var(--go-button-color-hover);
+}
+
+.go-button:active {
+    background-color: var(--go-button-color-active);
 }
 
 
