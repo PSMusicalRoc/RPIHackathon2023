@@ -10,6 +10,9 @@ global main_list
 global no_iterations 
 global no_exercises
 main_list = []
+global temp_list
+temp_list = []
+global index
 
 #called on startup
 @app.route('/')
@@ -71,14 +74,19 @@ def startSession():
         #get field this from the form given from the frontend
         global no_iterations
         global no_exercises
+        global temp_list
+        global main_list
+        global index
         no_iterations = int(request.form['number-iterations'])
         no_exercises = int(request.form['number-exercises'])
         print(no_iterations)
         print(no_exercises)
+        temp_list = Exercise.getExercises(main_list,no_exercises)
+        index = 0
         #do something with the given information
 
 
-    return redirect(url_for('render_session'))
+        return redirect(url_for('render_session'))
 
 @app.route('/render-session/')
 def render_session():
@@ -90,12 +98,25 @@ def render_session():
 def getNextExercise():
     if request.method == 'POST':
 
+        global no_exercises
+        global no_iterations
+        global index
         #get previous exercise
         exercise_name = request.form['this_exercise']
-        exercise_score = float(request.form[''])
-        #update this_exercise's score in the data structure
+        exercise_score = request.form['this_score']
+        if exercise_score != '':
+            score = exercise_score/no_iterations
+            #update this_exercise's score in the data structure
+            Exercise.scoring(main_list, exercise_name, score)
+        #send back string representation of exercise
+        send = temp_list[index] + ';' + str(no_iterations)
+        index += 1
+        print('send', send)
+        return send
+
         #get the next exercise
-        return "String representing the next exercise"
+
+
 
 #called when session finishes
 @app.route('/resultsRedirect/')
@@ -121,8 +142,15 @@ def showResults():
 def addExercise():
     if request.method == 'POST':
 
+        global main_list
+        new_exercise = request.form['new_exercise']
+
         #Jump:Hello;World;: is the format
+
+
         #add the exercise here
+        Exercise.addExercise(main_list, new_exercise)
+
         return "String that represents the data structure for the frontend's use"
 
 #removes an exercise
