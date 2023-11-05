@@ -109,10 +109,12 @@ def parse(filename):
             i = i.children[0]
     return a
 
+
+#Tree traversal. Returns a string with the name of an exercise. 
 def select(ex):
     ex.timesCalled+=1
     random.seed(a=None,version=2)
-    st = ex.name + ":"
+    st = ex.name
     while(len(ex.children)>0):
         rand = random.random()
         while(rand<=0):
@@ -140,15 +142,52 @@ def select(ex):
             ex.lastMult*=.5
         ex = ex.children[i]
         if(ex.name):
-            st = " ".join([st,ex.name])
+            st = ",".join([st,ex.name])
     print(st)
     return st
 
+def update(ex, exercises):
+    root = None
+    ex = ex.split(":")
+    for i in range(len(ex)):
+       ex[i] = ex[i].split(",")
+    for i in exercises:
+        if(ex[0][0]==i.name):
+            root = i
+            break
+    if not root:
+        return
+    arr = []
+    root.score *=5
+    root.score +=int(ex[0][1])
+    root.score /=6
+    prevRoot = root
+    for i in range(1, len(ex)):
+        j = 0
+        while(j < len(root.children)):
+            if(root.children[j] == ex[i][0]):
+                root = root.children[j]
+                arr.append(j)
+                break
+            j+=1
+        if(root == prevRoot):
+            return
+        prevRoot = root
+        root.score *=5
+        root.score +=int(ex[i][1])
+        root.score /=6
+    
+            
+        
+
 a = parse("../data/DummyData.txt")
-for i in range(200):
+for i in range(2):
     select(a[0])
 select(a[1])
 select(a[2])
+for i in range(200):
+    update("Jump,0:Full Hop,0:Fast Fall,0:Dair,0:Forward 0.5,0", a)
+print(a[0].score)
     
         
         
