@@ -249,7 +249,7 @@ def select(ex):
 #Updates scores along a specified path in the tree.
 def scoring(exercises, ex, n):
     root = None
-    ex = ex.split(":")
+    ex = ex.split(",")
     for i in exercises:
         if(ex[0]==i.name):
             root = i
