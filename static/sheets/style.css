@@ -55,6 +55,53 @@ input[type="checkbox"] {
     height: 20px;
 }
 
+.add-exercise {
+    width: 70%;
+    background-color: white;
+    height: var(--exercise-object-height);
+    outline: black 1px solid;
+    border-radius: var(--exercise-object-rounding);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px auto;
+}
+
+.add-exercise input[type="text"] {
+    height: inherit;
+    
+    width: 90%;
+    font-size: 30px;
+    flex-basis: 90%;
+    border-radius: var(--exercise-object-rounding);
+    border: none;
+}
+
+.add-exercise button {
+    margin: auto 0;
+    flex-basis: 10%;
+    height: inherit;
+    aspect-ratio: 1;
+
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    background-image: url("https://cdn.pixabay.com/photo/2014/04/02/10/55/plus-304947_1280.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.add-exercise button:hover {
+    filter: brightness(140%);
+}
+
+.add-exercise button:active {
+    filter: brightness(60%);
+}
+
+
 /* Exercise Objects */
 
 .exercise {
@@ -114,6 +161,10 @@ input[type="checkbox"] {
     background-color: transparent;
     box-shadow: none;
     border: none;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .exercise button:hover {
@@ -128,27 +179,18 @@ input[type="checkbox"] {
     display: block;
     flex-basis: 10%;
     background-image: url("https://static.vecteezy.com/system/resources/previews/022/448/543/original/illustration-of-colorful-pencil-with-eraser-free-png.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .exercise button.exclude {
     display: block;
     flex-basis: 10%;
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/8/81/Stop_sign.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .exercise button.delete {
     display: block;
     flex-basis: 10%;
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Red_X.svg/2048px-Red_X.svg.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 

@@ -93,20 +93,21 @@ class Exercise:
 
 
 
-    def toSendString(self, node, curr_string, l):
-        #if leaf, return
-        if len(node.children) == 0:
-            l.append(curr_string + node.name + ':' + str(node.score) + ';')
-            return
+    def toSendString(self, node):
+        s = node.name + ':' + str(node.score) + ';'
+        s += self.getChildString(node)
+
+        #print(s)
+        if(len(node.children) != 0):
+            #print('next: ', node.children[0].name, '\n')
+            return s + self.toSendString(node.children[0])
+        return s
+
+    def getChildString(self, node):
+        s = ''
         for c in node.children:
-            self.toSendString(c, curr_string + self.name + ' ', l)
-        return
-
-    def toSendStringCaller(self):
-        l = []
-        self.toSendString(self, '', l)
-        return l
-
+            s += c.name + ':' + str(c.score) + ';'
+        return s
 
     def toFormatString():
         #print all of this thing's info
@@ -189,10 +190,6 @@ def select(ex):
     print(st)
     return st
 
-<<<<<<< HEAD:Exercise.py
-#list of exercises
-'''
-=======
 def update(ex, exercises):
     root = None
     ex = ex.split(":")
@@ -227,20 +224,16 @@ def update(ex, exercises):
             
         
 
->>>>>>> 8c0efa9933a45cd80a35b65e152126e96a387f7f:backend/main.py
+'''
 a = parse("../data/DummyData.txt")
 for i in range(2):
     select(a[0])
 select(a[1])
 select(a[2])
-<<<<<<< HEAD:Exercise.py
-'''
-=======
 for i in range(200):
     update("Jump,0:Full Hop,0:Fast Fall,0:Dair,0:Forward 0.5,0", a)
 print(a[0].score)
     
->>>>>>> 8c0efa9933a45cd80a35b65e152126e96a387f7f:backend/main.py
-        
+'''
         
         
