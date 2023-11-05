@@ -45,16 +45,14 @@ def uploadExercises():
 
         outfile = open(file.filename)
         main_list = Exercise.parse(file.filename)
+        s = ''
         for e in main_list:
-            print(e.toSendString(e))
+            s += e.toSendString(e)
         #do stuff with file here...
 
         #sending back - should be "excercise:score;exercise:score;exercise:score......"
 
-        'Jump: Full Hop Fast Fall Fair Forward 1:0.5;'
-
-
-        return "obama"
+        return s
 
 
 
