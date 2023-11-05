@@ -19,7 +19,10 @@ function getNextExercise(firsttime) {
     const request = new XMLHttpRequest();
     request.onreadystatechange = async function() {
         if (request.readyState == 4 && request.status == 200) {
-            document.getElementById("exercise-to-do").innerHTML = "Shit and Fuck";
+            let values = request.responseText.split(";");
+            currentRepetitionsHTML.value = values[1];
+            currentExerciseHTML.value = values[0];
+            document.getElementById("exercise-to-do").innerHTML = parseExerciseName(values[0]);
             document.getElementById("number-reps-text").innerHTML = "Do " + currentRepetitionsHTML.value.toString() + " Reps";
             document.getElementById("num-correct").value = "";
         } else if (request.readyState == 4 && request.status != 200) {
@@ -28,4 +31,15 @@ function getNextExercise(firsttime) {
     }
     request.open("POST", "/getNextExercise", true);
     request.send(formdata);
+}
+
+function parseExerciseName(str) {
+    let values = str.split(",");
+    let output = "";
+    for (i = values.length - 1; i >= 0; i--)
+    {
+        output += values[i];
+        if (i != 0) output += " ";
+    }
+    return output;
 }
