@@ -239,7 +239,7 @@ def update(ex, exercises):
             
         
 
-
+"""
 a = parse("DummyData.txt")
 for i in range(2):
     select(a[0])
@@ -250,5 +250,6 @@ for i in range(20):
 print(a[0].score)
 print(a[0].toFormatString())
 print(a[0].toSendString(a[0]))
+"""
         
         
