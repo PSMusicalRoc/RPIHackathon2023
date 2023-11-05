@@ -6,14 +6,18 @@ import Exercise
 
 this_file = __file__
 app = Flask(__name__)
+global main_list
+global no_iterations 
+global no_exercises
 main_list = []
 
 #called on startup
 @app.route('/')
 def startUp():
-
+    global main_list
     #default values to start
     #print('base page', file=sys.stderr)
+    print(main_list)
 
     return render_template('index.html') 
 
@@ -43,11 +47,13 @@ def uploadExercises():
             os.remove(os.path.join(os.path.dirname(this_file), 'static/Exercises/Exercises.txt'))
         shutil.copy(file.filename, os.path.join(os.path.dirname(this_file), 'static/Exercises/Exercises.txt'))
 
+
+        #get main list of data from frontend (from file)
+        global main_list
         main_list = Exercise.parse(file.filename)
         s = ''
         for e in main_list:
             s += e.toSendString(e) + '......'
-        #do stuff with file here...
 
         #sending back - should be "excercise;score;exercise;score;:exercise;score......"
 
@@ -63,9 +69,14 @@ def startSession():
     if request.method == 'POST':
 
         #get field this from the form given from the frontend
-        no_iterations = request.form['number-iterations']
-        no_exercises = request.form['number-exercises']
+        global no_iterations
+        global no_exercises
+        no_iterations = int(request.form['number-iterations'])
+        no_exercises = int(request.form['number-exercises'])
+        print(no_iterations)
+        print(no_exercises)
         #do something with the given information
+
 
         return redirect(url_for('/render-session/'))
 
@@ -80,14 +91,14 @@ def getNextExercise():
     if request.method == 'POST':
 
         #get previous exercise
-        a = request.form['this_exercise']
-
+        exercise_name = request.form['this_exercise']
+        exercise_score = float(request.form[''])
         #update this_exercise's score in the data structure
         #get the next exercise
         return "String representing the next exercise"
 
 #called when session finishes
-@app.route('/resultsRedirect')
+@app.route('/resultsRedirect/')
 def resultsRedirect():
     return redirect(url_for('/showResults'))
 
@@ -110,6 +121,7 @@ def showResults():
 def addExercise():
     if request.method == 'POST':
 
+        #Jump:Hello;World;: is the format
         #add the exercise here
         return "String that represents the data structure for the frontend's use"
 
