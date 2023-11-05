@@ -221,7 +221,7 @@ function populateExercises(input_str)
             for (j = 0; j < data.layers[i].length; j++)
             {
                 if (j != 0) text += ", ";
-                text += data.layers[i][j].name + " (" + data.layers[i][j].score + ")";
+                text += data.layers[i][j].name + " (" + parseFloat(data.layers[i][j].score).toFixed(2).toString() + ")";
             }
             let radio = document.createElement("p");
             radio.innerHTML = text;
@@ -229,7 +229,7 @@ function populateExercises(input_str)
         }
 
         let ename = document.createElement("p");
-        ename.innerHTML = data.name.name + " (" + data.name.score + ")";
+        ename.innerHTML = data.name.name + " (" + parseFloat(data.name.score).toFixed(2).toString() + ")";
         ename.setAttribute("class", "name");
         standardvis.appendChild(ename);
 
