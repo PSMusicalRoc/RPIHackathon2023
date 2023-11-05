@@ -1,5 +1,7 @@
 let global_exercises = [];
 
+const default_score = 0.2;
+
 let delimiter = ":";
 let delimiter_pair = ";";
 
@@ -26,6 +28,30 @@ function fileChanged()
     );
 }
 
+function addExercise()
+{
+    let ename = document.getElementById("add-new-exercise").value;
+    let ename_nows = ename.replace(/\s/g,'');
+
+    if (ename_nows == "") return;
+    if (global_exercises.includes(ename)) return;
+
+    global_exercises = global_exercises.concat(ename, "0.2");
+    populateExercises(generateExerciseString(global_exercises));
+
+    document.getElementById("add-new-exercise").value = "";
+}
+
+function generateExerciseString(exercises)
+{
+    let out = "";
+    for (i = 0; i < exercises.length; i+=2)
+    {
+        out += exercises[i] + delimiter + exercises[i+1] + delimiter_pair;
+    }
+    return out;
+}
+
 function populateExercises(input_str)
 {
     let first_split = input_str.split(delimiter_pair);
@@ -41,10 +67,13 @@ function populateExercises(input_str)
     }
 
     console.log(exercises);
-
-    global_exercises = exercises;
+    global_exercises = [];
 
     let exerciseColumn = document.getElementsByClassName("exercise-col").item(0);
+    let elementsToBeRemoved = document.getElementsByClassName("exercise");
+    while (elementsToBeRemoved[0])
+        elementsToBeRemoved[0].parentNode.removeChild(elementsToBeRemoved[0]);
+
     for (e = 0; e < exercises.length; e+=2)
     {
         let exercise = document.createElement("div");
@@ -79,5 +108,6 @@ function populateExercises(input_str)
 
         exerciseColumn.appendChild(exercise);
     }
+    global_exercises = exercises;
 }
 
