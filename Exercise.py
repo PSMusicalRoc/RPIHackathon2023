@@ -108,11 +108,12 @@ class Exercise:
             #initialize the rest of its children.
             readString = readString[1:]
             
-            self.children = readString.split("{")
-            self.children[0] = self.children[0].split(";")
-            self.children[0][0] = self.children[0][0].split(",")
-            self.name = self.children[0][0][0]
-            self.score = float(self.children[0][0][1])
+            tVar = readString.split("{")
+            tVar = tVar[0].split(";")
+            tVar[0] = tVar[0].split(",")
+            self.name = tVar[0][0]
+            self.score = float(tVar[0][1])
+            self.children = []
             a = []
             if(len(self.children)>1):
                 self.children[1] = self.children[1].split(";")
@@ -255,14 +256,12 @@ def scoring(exercises, ex, n):
             root = i
             break
     if not root:
-        print("Bababooey")
         return
     arr = []
     root.score = float(root.score)
     root.score *=5
     root.score +=n
     root.score /=6
-    print("TJ SCORING: ", root.score)
     if(root.score <=.01):
         root.score = .01
     prevRoot = root
@@ -326,7 +325,7 @@ def remove(exercises, name):
             return
 
 
-'''
+
 a = parse("DummyData.txt")
 for i in range(2):
     select(a[0])
@@ -344,7 +343,8 @@ print(a[3].children[0].name)
 getExercises(a, 8)
 remove(a, "Jump")
 print(a[0].name)
-'''
+
+
 
 
         
