@@ -6,24 +6,59 @@ Created on Sat Nov  4 14:15:34 2023
 """
 
 
-
-import fileinput
-import numpy as n
 import random
 class Exercise:
     #Recursively creates all objects readable from the string.
     
 
-    def __init__(self, readString, ind=-1, lst = []):
-        b = "{"
+    def __init__(self, readString, ind=-1, lst = [], ch = "{"):
         self.lastPath = -1
         self.lastMult = .5
         #This piece defines the root node.
+        if(ch==":"):
+            if(ind==-1):
+                tVar = readString.split(ch)
+                for i in range(len(tVar)):
+                    tVar[i] = tVar[i].split(";")
+                self.children = []
+                self.name = tVar[0][0]
+                self.score = 0.2
+                self.timesCalled = 0
+                if(len(tVar)>1):
+                    self.size =len(tVar[1])
+                    for i in range(len(tVar[1])):
+                        if(i==0):
+                            self.children.append(Exercise(readString[readString.index(ch)+1:],0,ch=":"))
+                            self.size *= self.children[0].size
+                        else:
+                            self.children.append(Exercise(tVar[1][i],1,self.children[0].children,":"))
+            elif (ind==0):
+                tVar = readString.split(ch)
+                tVar[0] = tVar[0].split(";")
+                self.name = tVar[0][0]
+                self.score = 0.2
+                self.size = 1
+                self.children = []
+                if(len(tVar)>1):
+                    tVar[1] = tVar[1].split(";")
+                    self.size *= len(tVar[1])
+                    for i in range(len(tVar[1])):
+                        if(i==0):
+                            self.children.append(Exercise(readString[readString.index(ch)+1:],0,ch=":"))
+                            self.size *= self.children[0].size
+                        else: 
+                            self.children.append(Exercise(tVar[1][i],1,self.children[0].children,ch=":"))
+            else:
+                self.name = readString
+                self.score = 0.2
+                self.children = lst
+            return
         if(ind==-1):
-            tVar = readString.split(b)
+            tVar = readString.split(ch)
             self.children=[]
-            readString = readString[1:]
-            tVar = readString.split(b)
+            if(ch=="{"):
+                readString = readString[1:]
+            tVar = readString.split(ch)
             #Define the root's own aspects
             tVar[0] = tVar[0].split(",")
             self.size = tVar[0][0]
@@ -164,6 +199,8 @@ def parse(filename):
             i = i.children[0]
     return a
 
+
+#Loops through each exercise, calls toString, and writes to file.
 def write(filename, exercises):
     a = ""
     for i in exercises:
@@ -208,6 +245,7 @@ def select(ex):
     print(st)
     return st
 
+#Updates scores along a specified path in the tree.
 def update(ex, exercises):
     root = None
     ex = ex.split(":")
@@ -258,6 +296,9 @@ print(a[0].score)
 print(a[0].toFormatString())
 print(a[0].toSendString(a[0]))
 write("t.txt",a)
-'''
 
+d = Exercise("Jump:Short Hop;Full Hop;:Fastfall:bo:a;Test2:Something:Nothing;Here;......",ch=":")
+print(d.name, d.children[0].name, d.children[1].name, d.size)
+print(d.children[0].children[0].children[0].children[0].name)
+'''
         
