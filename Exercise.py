@@ -255,14 +255,12 @@ def scoring(exercises, ex, n):
             root = i
             break
     if not root:
-        print("Bababooey")
         return
     arr = []
     root.score = float(root.score)
     root.score *=5
     root.score +=n
     root.score /=6
-    print("TJ SCORING: ", root.score)
     if(root.score <=.01):
         root.score = .01
     prevRoot = root
