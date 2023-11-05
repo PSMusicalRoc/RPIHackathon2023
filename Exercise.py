@@ -257,9 +257,11 @@ def scoring(exercises, ex, n):
     if not root:
         return
     arr = []
+    root.score = float(root.score)
     root.score *=5
     root.score +=n
     root.score /=6
+    print("TJ SCORING: ", root.score)
     if(root.score <=.01):
         root.score = .01
     prevRoot = root
@@ -323,8 +325,7 @@ def remove(exercises, name):
             return
 
 
-    
-        
+
 a = parse("t.txt")
 for i in range(2):
     select(a[0])
@@ -342,6 +343,7 @@ print(a[3].children[0].name)
 getExercises(a, 8)
 remove(a, "Jump")
 print(a[0].name)
+
 
 
         
