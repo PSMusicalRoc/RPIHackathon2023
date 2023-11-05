@@ -20,11 +20,22 @@ function getNextExercise(firsttime) {
     request.onreadystatechange = async function() {
         if (request.readyState == 4 && request.status == 200) {
             let values = request.responseText.split(";");
-            currentRepetitionsHTML.value = values[1];
-            currentExerciseHTML.value = values[0];
-            document.getElementById("exercise-to-do").innerHTML = parseExerciseName(values[0]);
-            document.getElementById("number-reps-text").innerHTML = "Do " + currentRepetitionsHTML.value.toString() + " Reps";
-            document.getElementById("num-correct").value = "";
+            let redirectcheck = request.responseText.split("......redirect......");
+
+            if (redirectcheck.length == 2 && redirectcheck[0].length == 0)
+            {
+                document.open();
+                document.write(redirectcheck[1]);
+                document.close();
+                return;
+            }
+            else {
+                currentRepetitionsHTML.value = values[1];
+                currentExerciseHTML.value = values[0];
+                document.getElementById("exercise-to-do").innerHTML = parseExerciseName(values[0]);
+                document.getElementById("number-reps-text").innerHTML = "Do " + currentRepetitionsHTML.value.toString() + " Reps";
+                document.getElementById("num-correct").value = "";
+            }
         } else if (request.readyState == 4 && request.status != 200) {
             console.log('ERROR: ' + request.responseText)
         }
