@@ -33,7 +33,7 @@ def startUp():
 @app.route('/downloadExercises/')
 def downloadExercises():
     #print(f"PATH: {os.path.join(os.path.dirname(this_file), 'logfile.txt')}")
-    return send_file(os.path.join(os.path.dirname(this_file), 'Exercises.txt'), as_attachment=True)
+    return send_file(os.path.join(os.path.dirname(this_file), 'static/Exercises/Exercises.txt'), as_attachment=True)
 
 
 
