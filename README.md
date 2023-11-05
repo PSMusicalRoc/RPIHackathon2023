@@ -1,4 +1,4 @@
-# RPI Hackathon 2023 - Projectname here
+# RPI Hackathon 2023 - TenHut(?)
 
 #### Authors
 
