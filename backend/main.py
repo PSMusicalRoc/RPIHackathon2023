@@ -87,7 +87,7 @@ def parse(filename):
 def select(ex):
     ex.timesCalled+=1
     random.seed(a=None,version=2)
-    st = ""
+    st = ex.name + ":"
     while(len(ex.children)>0):
         rand = random.random()
         while(rand<=0):
@@ -117,10 +117,13 @@ def select(ex):
         if(ex.name):
             st = " ".join([st,ex.name])
     print(st)
+    return st
 
 a = parse("../data/DummyData.txt")
 for i in range(200):
     select(a[0])
+select(a[1])
+select(a[2])
     
         
         
