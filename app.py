@@ -109,7 +109,7 @@ def getNextExercise():
             #update this_exercise's score in the data structure
             Exercise.scoring(main_list, exercise_name, score)
         #send back string representation of exercise
-        send = temp_list[index]
+        send = temp_list[index] + str(no_iterations)
         index += 1
         print('send', send)
         return send
