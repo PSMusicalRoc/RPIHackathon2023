@@ -43,7 +43,7 @@ def uploadExercises():
         print(data)
         #do stuff with file here...
 
-        return redirect(url_for('startUp'))
+        return "obama"
 
 
 
