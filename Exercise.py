@@ -316,10 +316,15 @@ def getExercises(exercises, a):
         arr.append(select(exercises[j]))
     return arr
 
+def remove(exercises, name):
+    for i in range(len(exercises)):
+        if(exercises[i].name==name):
+            exercises.pop(i)
+            return
+
 
     
         
-"""
 a = parse("t.txt")
 for i in range(2):
     select(a[0])
@@ -335,7 +340,8 @@ write("t.txt",a)
 addExercise(a, "Jump:Short Hop;Full Hop;:Fastfall:bo:a;Test2:Something:Nothing;Here;......")
 print(a[3].children[0].name)
 getExercises(a, 8)
-"""
+remove(a, "Jump")
+print(a[0].name)
 
 
         

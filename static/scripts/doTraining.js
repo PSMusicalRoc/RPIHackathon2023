@@ -43,3 +43,18 @@ function parseExerciseName(str) {
     }
     return output;
 }
+
+function triggerDownloadConfig() {
+    if (request.readyState == 4 && request.status == 200) {
+        let values = request.responseText.split(";");
+        currentRepetitionsHTML.value = values[1];
+        currentExerciseHTML.value = values[0];
+        document.getElementById("exercise-to-do").innerHTML = parseExerciseName(values[0]);
+        document.getElementById("number-reps-text").innerHTML = "Do " + currentRepetitionsHTML.value.toString() + " Reps";
+        document.getElementById("num-correct").value = "";
+    } else if (request.readyState == 4 && request.status != 200) {
+        console.log('ERROR: ' + request.responseText)
+    }
+    request.open("GET", "/downloadExercises", true);
+    request.send();
+}
