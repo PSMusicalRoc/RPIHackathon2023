@@ -17,10 +17,12 @@
     --exercise-object-height: 50px;
     --exercise-object-rounding: 5px;
     --exercise-button-size: 20px;
+
+    --page-background-color: skyblue;
 }
 
 html {
-    background-color: skyblue;
+    background-color: #719abf;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -251,7 +253,7 @@ input[type="file"] {
     outline: black 1px left;
     height: calc(100vh - 20px - var(--footer-height) - var(--go-height) - 20px);
     margin-right: 5px;
-    background-color: white;
+    background-color: var(--page-background-color);
     overflow-y: auto;
     border-radius: 15px;
 }
@@ -263,7 +265,7 @@ input[type="file"] {
     flex: 1;
     margin-left: 5px;
     height: calc(100vh - 20px - var(--footer-height) - var(--go-height) - 20px);
-    background-color: teal;
+    background-color: var(--page-background-color);
     overflow-y: auto;
     border-radius: 15px;
 }
@@ -275,7 +277,7 @@ input[type="file"] {
     flex-basis: 100%;
     width: 100%;
     flex: 1;
-    background-color: purple;
+    background-color: var(--page-background-color);
     height: var(--go-height);
     border-radius: 15px;
 }
