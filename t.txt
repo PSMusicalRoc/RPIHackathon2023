@@ -1,0 +1,1 @@
+{24,2,Jump,0.026084053304588836{Full Hop,0.01;Short Hop,0.9{Fast Fall,0.0156504319827533;,0.8{Fair,0.2;Nair,0.4;Dair,0.0156504319827533;Bair,0.8;Upair,1.0;,1.0{Forward 0.5,0.026084053304588836;Forward 1,1.0;Forward 1.5,1.0;Backward 0.5,1.0;Backward 1,1.0;Backward 1.5,1.0}{1,1,Dashwalk,1.0}{4,1,Up B OOS,1.0{Turnaround,1.0;,1.0{Angled,1.0;,1.0}
