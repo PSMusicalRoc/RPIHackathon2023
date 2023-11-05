@@ -53,12 +53,43 @@ function addExercise()
     let ename_nows = ename.replace(/\s/g,'');
 
     if (ename_nows == "") return;
-    if (global_exercises.includes(ename)) return;
+    
 
-    global_exercises = global_exercises.concat(ename, "0.2");
-    populateExercises(generateExerciseString(global_exercises));
+    const formdata = new FormData;
+    formdata.set("new_exercise", ename);
 
-    document.getElementById("add-new-exercise").value = "";
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = async function() {
+        if (request.readyState == 4 && request.status == 200) {
+            global_exercises = parseBackendString(request.responseText);
+            populateExercises(request.responseText);
+            document.getElementById("add-new-exercise").value = "";
+        } else if (request.readyState == 4 && request.status != 200) {
+            console.log('ERROR: ' + request.responseText)
+        }
+    }
+    request.open("POST", "/addExercise",true);
+    request.send(formdata);
+
+    // global_exercises = global_exercises.concat(ename, "0.2");
+    // populateExercises(generateExerciseString(global_exercises));
+}
+
+function removeExercise(element) {
+    const formdata = new FormData;
+    formdata.set("remove_exercise", element);
+
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = async function() {
+        if (request.readyState == 4 && request.status == 200) {
+            global_exercises = parseBackendString(request.responseText);
+            populateExercises(request.responseText);
+        } else if (request.readyState == 4 && request.status != 200) {
+            console.log('ERROR: ' + request.responseText)
+        }
+    }
+    request.open("POST", "/removeExercise",true);
+    request.send(formdata);
 }
 
 function toggleDropdown(index) {
@@ -133,6 +164,26 @@ function generateBackendString(exercises)
     // reverse of parseBackendString()
     // make sure to test that each layer has something
     // in it, otherwise remove it
+
+    let output = "";
+    for (i = 0; i < exercises.length; i++)
+    {
+        let exercise_item = exercises[i];
+        output += exercise_item.name.name + name_delim + exercise_item.name.score + layer_delim;
+        for (j = 0; j < exercise_item.layers.length; j++)
+        {
+            let layer = exercise_item.layers[j];
+            for (k = 0; k < layer.length; k++)
+            {
+                let leaf = layer[k];
+                output += leaf.name + name_delim + leaf.score + name_delim;
+            }
+            output += layer_delim;
+        }
+        output += action_delim;
+    }
+
+    return output;
 }
 
 function populateExercises(input_str)
@@ -195,6 +246,7 @@ function populateExercises(input_str)
 
         let deletebutton = document.createElement("button");
         deletebutton.setAttribute("class", "delete");
+        deletebutton.setAttribute("onclick", "removeExercise(\"" + data.name.name + "\");");
         standardvis.appendChild(deletebutton);
 
         exercise.appendChild(standardvis);

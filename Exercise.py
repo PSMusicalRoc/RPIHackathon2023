@@ -324,7 +324,7 @@ def remove(exercises, name):
             return
 
 
-
+'''
 a = parse("DummyData.txt")
 for i in range(2):
     select(a[0])
@@ -342,7 +342,7 @@ print(a[3].children[0].name)
 getExercises(a, 8)
 remove(a, "Jump")
 print(a[0].name)
-
+'''
 
 
         
