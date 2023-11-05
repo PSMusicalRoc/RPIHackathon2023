@@ -56,6 +56,7 @@ function parseExerciseName(str) {
 }
 
 function triggerDownloadConfig() {
+    const request = new XMLHttpRequest();
     if (request.readyState == 4 && request.status == 200) {
         let values = request.responseText.split(";");
         currentRepetitionsHTML.value = values[1];
