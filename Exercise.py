@@ -100,13 +100,14 @@ class Exercise:
         #print(s)
         if(len(node.children) != 0):
             #print('next: ', node.children[0].name, '\n')
-            return s + self.toSendString(node.children[0])
+            return s + self.toSendString(node.children[-1])
         return s
 
     def getChildString(self, node):
         s = ''
-        for c in node.children:
-            s += c.name + ':' + str(c.score) + ';'
+        if(len(node.children)>1):
+            for c in node.children[:-1]:
+                s += c.name + ':' + str(c.score) + ';'
         return s
 
     def toFormatString(self):
@@ -238,7 +239,7 @@ def update(ex, exercises):
             
         
 
-'''
+
 a = parse("DummyData.txt")
 for i in range(2):
     select(a[0])
@@ -248,6 +249,6 @@ for i in range(20):
     update("Jump,0:Full Hop,0:Fast Fall,0:Dair,0:Forward 0.5,0", a)
 print(a[0].score)
 print(a[0].toFormatString())
-'''
+print(a[0].toSendString(a[0]))
         
         
