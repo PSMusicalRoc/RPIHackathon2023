@@ -62,13 +62,15 @@ def startSession():
     if request.method == 'POST':
 
         #get field this from the form given from the frontend
-        a = request.form['this']
-
+        no_iterations = request.form['number-iterations']
+        no_exercises = request.form['number-exercises']
         #do something with the given information
 
-        return redirect(url_for('/'))
+        return redirect(url_for('/render-session/'))
 
-
+@app.route('/render-session/')
+def render_session():
+    return render_template('doExercise.html')
 
 #get prev exercise with score, update the tree (?), get the next exercise and send it to the frontend
 #probably called from js to keep updating page

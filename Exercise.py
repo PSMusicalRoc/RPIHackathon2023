@@ -92,6 +92,8 @@ class Exercise:
                         self.children.append(Exercise(a[i].split(","),0, self.children[i-1].children))
 
 
+#Get in format Action:layer1(separated by semicolons):layer2:etc......(6 dots delimeter)Action:layer1:layer2
+
 
     def toSendString(self, node):
         s = node.name + ':' + str(node.score) + ';'
