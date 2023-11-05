@@ -47,10 +47,10 @@ function getNextExercise(firsttime) {
 function parseExerciseName(str) {
     let values = str.split(",");
     let output = "";
-    for (i = values.length - 1; i >= 0; i--)
+    for (i = 0; i < values.length; i++)
     {
-        output += values[i];
         if (i != 0) output += " ";
+        output += values[i];
     }
     return output;
 }
