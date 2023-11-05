@@ -14,6 +14,7 @@ class Exercise:
     def __init__(self, readString, ind=-1, lst = [], ch = "{"):
         self.size = 0
         self.score = 0.2
+        self.timesCalled = 0
         self.lastPath = -1
         self.lastMult = .5
         #This piece defines the root node.
