@@ -100,6 +100,7 @@ def getNextExercise():
 
         global no_exercises
         global no_iterations
+        global index
         #get previous exercise
         exercise_name = request.form['this_exercise']
         exercise_score = request.form['this_score']
@@ -110,6 +111,7 @@ def getNextExercise():
         #send back string representation of exercise
         send = temp_list[index]
         index += 1
+        print('send', send)
         return send
 
         #get the next exercise
