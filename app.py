@@ -76,11 +76,13 @@ def startSession():
         global no_exercises
         global temp_list
         global main_list
+        global index
         no_iterations = int(request.form['number-iterations'])
         no_exercises = int(request.form['number-exercises'])
         print(no_iterations)
         print(no_exercises)
         temp_list = Exercise.getExercises(main_list,no_exercises)
+        index = 0
         #do something with the given information
 
 
@@ -100,18 +102,19 @@ def getNextExercise():
         global no_iterations
         #get previous exercise
         exercise_name = request.form['this_exercise']
-        exercise_score = float(request.form['this_score'])
-        score = exercise_score/no_iterations
-        #update this_exercise's score in the data structure
-
-        Exercise.scoring(main_list, exercise_name, score)
+        exercise_score = request.form['this_score']
+        if exercise_score != '':
+            score = exercise_score/no_iterations
+            #update this_exercise's score in the data structure
+            Exercise.scoring(main_list, exercise_name, score)
+        #send back string representation of exercise
+        send = temp_list[index]
+        index += 1
+        return send
 
         #get the next exercise
 
-        
 
-
-        return "String representing the next exercise"
 
 #called when session finishes
 @app.route('/resultsRedirect/')
