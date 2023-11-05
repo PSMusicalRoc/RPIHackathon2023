@@ -1,28 +1,48 @@
-
 <!DOCTYPE html>
-
-
-<html lang = 'en'>
-<head>
-    <link rel="shortcut icon" href="/asxhtml/favicon.ico">
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>ASXSIM</title>
-    <style>
-    </style>
-</head>
-
-
-<body style = 'overflow: auto;'>
-
-
-<div style="font-size:20px;font-weight:100;">
-    Download Exercises log: 
-    <a href="\downloadExercises">
-        <button type="button">Download</button>
-    </a>
-</div>
-
-
-</body>
+<html>
+    <head>
+        <link href="static/sheets/style.css" rel="stylesheet">
+        <script src="static/scripts/exercises.js"></script>
+        <title>Smash Bros. Training Thing</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div class="container">
+            <div class="checkbox-col">
+                <h2 style="text-align: center;">Options</h2>
+                <table>
+                    <form action="" method="get" class="centered-col"></form>
+                    <tr>
+                        <td><label for="file-upload">Upload previous configuration file here:</label></td>
+                        <td><input type="file" id="file-upload" onchange="fileChanged()" accept=".txt"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="number-iterations">Number of iterations per exercise:</label></td>
+                        <td><input type="number" id="number-iterations" autocomplete="off"
+                            min="0"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="number-exercises">Number of exercises in this session:</label></td>
+                        <td><input type="number" id="number-exercises" autocomplete="off"
+                        min="0"></td>
+                    </tr>
+                </table>
+                </form>
+            </div>
+            <div class="exercise-col">
+                <h2 style="text-align: center;">Exercises</h2>
+            </div>
+        </div>
+        <div class="go-partition">
+            <p class="centered-col" style="text-align: center; font-size: 30px;">Go!</p>
+        </div>
+        <footer>
+            <p>Tim Bishop, RPI Class of 2025, Frontend</p>
+            <p>TJ Hatch, RPI Class of 2026, Design</p>
+            <p>Alex Houck, RPI Class of 2024, Backend</p>
+        </footer>
+        <script>
+            populateExercises(["Jump", "Test", "Test2"]);
+        </script>
+    </body>
 </html>

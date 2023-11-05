@@ -8,7 +8,7 @@ function fileChanged()
     file.text().then(
         (str) => {
             let formdata = new FormData;
-            formdata.append("input", str);
+            formdata.append("input", file);
 
             const request = new XMLHttpRequest();
             request.onreadystatechange = async function() {
@@ -18,7 +18,7 @@ function fileChanged()
                     console.log('ERROR: ' + request.responseText)
                 }
             }
-            request.open("POST", "/uploadExercises");
+            request.open("POST", "/uploadExercises",true);
             request.send(formdata);
         },
         (str) => {console.log("There was an error: " + str);}

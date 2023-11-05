@@ -7,12 +7,18 @@
 - for a given exercise session
     - [ ] Choosing number of exercises per session
     - [ ] Choosing number of repetitions
-    - Choosing certain exercises
+    - Choosing certain exercises - HOLD OFF UNTIL LATER
         - [ ] Start with the full list of exercises, remove exercises from the list to get a list of exercises to be used in this exercise session
         - [ ] Start from a blank list of exercises, add exercises to the list to be used in this exercise session
     - [ ] at the end of each exercise, user reports how many successes out of the number of repetitions
 - [ ] After an exercise session/during the exercise session, update the scores for exercises to be used in subsequent sessions
 - [ ] Display summary of session (what we want to display pending)
+    - [ ] Highest success rate
+    - [ ] Lowest success rate
+    - [ ] Most improved exercise (compare old score to new score)
+    - [ ] Exercise in which you did worse than usual
+    - [ ] Which particular action you were most consistent at (singular node)
+    - [ ] Which particular action you were least consistent at (singular node)
 
 # Scoring
 - [ ] Set score based on 1-(#success/#repetitions)

@@ -15,6 +15,10 @@ def startUp():
 
     return render_template('index.html') 
 
+
+
+
+
 #downloads exercise file
 #the file we should use should be uner the name Exercises.txt
 @app.route('/downloadExercises/')
@@ -26,7 +30,7 @@ def downloadExercises():
 @app.route('/uploadExercises/', methods = ['POST'])
 def uploadExercises():
     if request.method == 'POST':
-        file = request.files['sfile']
+        file = request.files['input']
         file.save(file.filename)
         
         #delete and replace the file if it exists lol
@@ -34,9 +38,12 @@ def uploadExercises():
             os.remove(os.path.join(os.path.dirname(this_file), 'static/Exercises/Exercises.txt'))
         shutil.copy(file.filename, os.path.join(os.path.dirname(this_file), 'static/Exercises/Exercises.txt'))
 
+        outfile = open(file.filename)
+        data = outfile.readlines()
+        print(data)
         #do stuff with file here...
 
-        return redirect(url_for('/'))
+        return "obama"
 
 
 
@@ -52,6 +59,40 @@ def startSession():
 
         return redirect(url_for('/'))
 
+
+
+#get prev exercise with score, update the tree (?), get the next exercise and send it to the frontend
+#probably called from js to keep updating page
+@app.route('/getNextExercise/', methods = ['POST'])
+def getNextExercise():
+    if request.method == 'POST':
+
+        #get previous exercise
+        a = request.form['this_exercise']
+
+        #update this_exercise's score in the data structure
+        #get the next exercise
+        return "String representing the next exercise"
+
+#called when session finishes
+@app.route('/resultsRedirect')
+def resultsRedirect():
+    return redirect(url_for('/showResults'))
+
+#returns results information
+@app.route('/showResults/')
+def showResults():
+
+    return 'results string'
+
+
+
+#######################################################################################################################################
+########################################################   DO LATER   #################################################################
+#######################################################################################################################################
+
+
+#fuck you use our input file
 #adds an exercise
 @app.route('/addExercise/', methods = ['POST'])
 def addExercise():
@@ -67,15 +108,3 @@ def removeExercise():
 
         #remove the exercise here
         return "String that represents the data structure for the frontend's use"
-
-#updates previous exercise from the tree, gets next exercise from the tree
-@app.route('/getNextExercise/', methods = ['POST'])
-def getNextExercise():
-    if request.method == 'POST':
-
-        #get previous exercise
-        a = request.form['this_exercise']
-
-        #update this_exercise's score in the data structure
-        #get the next exercise
-        return "String representing the next exercise"
