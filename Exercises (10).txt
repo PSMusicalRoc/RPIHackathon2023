@@ -1,0 +1,1 @@
+{24,2,Jump,0.3055555555555555{Full Hop,0.375;Short Hop,0.9{}{1,2,Dashwalk,0.7199074074074073}{4,1,Up B OOS,1.0{Turnaround,1.0;,1.0{}
