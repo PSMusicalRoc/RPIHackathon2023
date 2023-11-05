@@ -1,6 +1,7 @@
 let global_exercises = [];
 
-let delimiter = ".......";
+let delimiter = ":";
+let delimiter_pair = ";";
 
 function fileChanged()
 {
@@ -25,12 +26,26 @@ function fileChanged()
     );
 }
 
-function populateExercises(exercises)
+function populateExercises(input_str)
 {
+    let first_split = input_str.split(delimiter_pair);
+    if (first_split[first_split.length - 1].length == 0)
+    {
+        first_split.pop();
+    }
+    let exercises = [];
+    for (i = 0; i < first_split.length; i++)
+    {
+        let temp = first_split[i].split(delimiter);
+        exercises = exercises.concat(temp);
+    }
+
+    console.log(exercises);
+
     global_exercises = exercises;
 
     let exerciseColumn = document.getElementsByClassName("exercise-col").item(0);
-    for (e in exercises)
+    for (e = 0; e < exercises.length; e+=2)
     {
         let exercise = document.createElement("div");
         exercise.setAttribute("class", "exercise");
@@ -38,11 +53,15 @@ function populateExercises(exercises)
         let standardvis = document.createElement("div");
         standardvis.setAttribute("class", "standard");
 
-
         let ename = document.createElement("p");
         ename.innerHTML = exercises[e];
         ename.setAttribute("class", "name");
         standardvis.appendChild(ename);
+
+        let escore = document.createElement("p");
+        escore.innerHTML = "Score: " + exercises[e+1].toString();
+        escore.setAttribute("style", "width: 30%;");
+        standardvis.appendChild(escore);
 
         let editbutton = document.createElement("button");
         editbutton.setAttribute("class", "edit");
