@@ -7,8 +7,7 @@
 - TJ Hatch - RPI Class of 2026
 
 
-usage: python -m flask --app RPIHackathon2023 run 
-from the folder OUTSIDE RPIHACKATHON2023
+usage: python -m flask run
 
 will run on 127.0.0.1, put "http://127.0.0.1:5000/" into browser
 

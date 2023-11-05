@@ -90,7 +90,25 @@ class Exercise:
                         self.children.append(Exercise(readString[readString.index("{"):],1))
                     else:
                         self.children.append(Exercise(a[i].split(","),0, self.children[i-1].children))
-           
+
+
+
+    def toSendString(self, node, curr_string, l):
+        #if leaf, return
+        if len(node.children) == 0:
+            l.append(curr_string + node.name + ':' + str(node.score) + ';')
+            return
+        for c in node.children:
+            self.toSendString(c, curr_string + self.name + ' ', l)
+        return
+
+    def toSendStringCaller(self):
+        l = []
+        self.toSendString(self, '', l)
+        return l
+
+
+
 #With correct input this function should always work.
 
 #Don't mess with it.
@@ -144,12 +162,14 @@ def select(ex):
     print(st)
     return st
 
+#list of exercises
+'''
 a = parse("../data/DummyData.txt")
 for i in range(200):
     select(a[0])
 select(a[1])
 select(a[2])
-    
+'''
         
         
         
