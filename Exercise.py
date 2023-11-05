@@ -282,11 +282,13 @@ def update(ex, exercises):
         root.score /=6
         if(root.score <=.01):
             root.score = .01
+            
+def addExercise(exercises, a):
+    exercises.append(Exercise(a,ch = ":"))
     
             
         
 
-'''
 a = parse("t.txt")
 for i in range(2):
     select(a[0])
@@ -299,8 +301,8 @@ print(a[0].toFormatString())
 print(a[0].toSendString(a[0]))
 write("t.txt",a)
 
-d = Exercise("Jump:Short Hop;Full Hop;:Fastfall:bo:a;Test2:Something:Nothing;Here;......",ch=":")
-print(d.name, d.children[0].name, d.children[1].name, d.size)
-print(d.children[0].children[0].children[0].children[0].name)
-'''
+addExercise(a, "Jump:Short Hop;Full Hop;:Fastfall:bo:a;Test2:Something:Nothing;Here;......")
+print(a[3].children[0].name)
+
+
         
