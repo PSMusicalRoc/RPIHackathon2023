@@ -255,6 +255,7 @@ def scoring(exercises, ex, n):
             root = i
             break
     if not root:
+        print("Bababooey")
         return
     arr = []
     root.score = float(root.score)
@@ -326,7 +327,7 @@ def remove(exercises, name):
 
 
 
-a = parse("t.txt")
+a = parse("DummyData.txt")
 for i in range(2):
     select(a[0])
 select(a[1])
