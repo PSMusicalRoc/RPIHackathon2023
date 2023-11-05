@@ -247,20 +247,18 @@ def select(ex):
     return st
 
 #Updates scores along a specified path in the tree.
-def update(ex, exercises):
+def scoring(exercises, ex, n):
     root = None
     ex = ex.split(":")
-    for i in range(len(ex)):
-       ex[i] = ex[i].split(",")
     for i in exercises:
-        if(ex[0][0]==i.name):
+        if(ex[0]==i.name):
             root = i
             break
     if not root:
         return
     arr = []
     root.score *=5
-    root.score +=int(ex[0][1])
+    root.score +=n
     root.score /=6
     if(root.score <=.01):
         root.score = .01
@@ -268,7 +266,7 @@ def update(ex, exercises):
     for i in range(1, len(ex)):
         j = 0
         while(j < len(root.children)):
-            if(root.children[j].name == ex[i][0]):
+            if(root.children[j].name == ex[i]):
                 root = root.children[j]
                 arr.append(j)
                 break
@@ -277,10 +275,12 @@ def update(ex, exercises):
             return
         prevRoot = root
         root.score *=5
-        root.score +=int(ex[i][1])
+        root.score +=n
         root.score /=6
         if(root.score <=.01):
             root.score = .01
+            
+
             
 def addExercise(exercises, a):
     exercises.append(Exercise(a,ch = ":"))
@@ -314,19 +314,19 @@ def getExercises(exercises, a):
             discourage = .5
         lasti = j
         arr.append(select(exercises[j]))
-        print(exercises[j].name, exercises[j].score)
-    print(arr)
     return arr
+
+
     
         
-
+"""
 a = parse("t.txt")
 for i in range(2):
     select(a[0])
 select(a[1])
 select(a[2])
-for i in range(20):
-    update("Jump,0:Full Hop,0:Fast Fall,0:Dair,0:Forward 0.5,0", a)
+for i in range(15):
+    scoring(a,"Jump:Full Hop:Fast Fall:Dair:Forward 0.5", .5)
 print(a[0].score)
 print(a[0].toFormatString())
 print(a[0].toSendString(a[0]))
@@ -335,6 +335,7 @@ write("t.txt",a)
 addExercise(a, "Jump:Short Hop;Full Hop;:Fastfall:bo:a;Test2:Something:Nothing;Here;......")
 print(a[3].children[0].name)
 getExercises(a, 8)
+"""
 
 
         
