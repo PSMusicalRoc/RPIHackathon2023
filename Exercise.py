@@ -109,17 +109,17 @@ class Exercise:
             s += c.name + ':' + str(c.score) + ';'
         return s
 
-    def toFormatString():
+    def toFormatString(self):
         #print all of this thing's info
-        a = "{" + string(self.timesCalled) + "," + \
-            string(self.size) + "," + self.name + \
-                "," + string(self.score)
-        if(len(a.children)>0):
+        a = "{" + str(self.size) + "," + \
+            str(self.timesCalled) + "," + self.name + \
+                "," + str(self.score)
+        if(len(self.children)>0):
             a = a + "{"
         #print all of its childrens' info
             for i in range(len(self.children)):
                 a = a + self.children[i].name + "," +\
-                    self.children[i].score
+                    str(self.children[i].score)
                 if(i+1<len(self.children)):
                     a = a + ";"
                 else: a = a + "{"
@@ -127,9 +127,19 @@ class Exercise:
         a = a + "}"
         return a
         
-    def toFormatStringChild():
-        if(len(a.children)>0):
-            print("a")
+    def toFormatStringChild(self):
+        a = ""
+        if(len(self.children)>0):
+            for i in range(len(self.children)):
+                a = a + self.children[i].name + \
+                    "," + str(self.children[i].score)
+                if(i+1<len(self.children)):
+                    a = a + ";"
+                else:
+                    if(len(self.children[0].children)>0):
+                        a = a + "{"
+            a = a + self.children[0].toFormatStringChild()
+        return a
         #print all of this thing's childrens' info
         #call this for this things' children[]
         
@@ -205,11 +215,13 @@ def update(ex, exercises):
     root.score *=5
     root.score +=int(ex[0][1])
     root.score /=6
+    if(root.score <=.01):
+        root.score = .01
     prevRoot = root
     for i in range(1, len(ex)):
         j = 0
         while(j < len(root.children)):
-            if(root.children[j] == ex[i][0]):
+            if(root.children[j].name == ex[i][0]):
                 root = root.children[j]
                 arr.append(j)
                 break
@@ -220,20 +232,22 @@ def update(ex, exercises):
         root.score *=5
         root.score +=int(ex[i][1])
         root.score /=6
+        if(root.score <=.01):
+            root.score = .01
     
             
         
 
 '''
-a = parse("../data/DummyData.txt")
+a = parse("DummyData.txt")
 for i in range(2):
     select(a[0])
 select(a[1])
 select(a[2])
-for i in range(200):
+for i in range(20):
     update("Jump,0:Full Hop,0:Fast Fall,0:Dair,0:Forward 0.5,0", a)
 print(a[0].score)
-    
+print(a[0].toFormatString())
 '''
         
         
