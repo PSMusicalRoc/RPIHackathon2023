@@ -1,1 +1,1 @@
-{24,0,Jump,1{Full Hop,1;Short Hop,1{Fast Fall,1;,1{Fair,1;Nair,1;Dair,1;Bair,1;Upair,1;,1}{1,0,Dashwalk,1}{4,0,Up B OOS,1{Turnaround,1;,1{Angled,1;,1}
+{24,0,Jump,1{Full Hop,.1;Short Hop,.9{Fast Fall,.6;,.8{Fair,.2;Nair,.4;Dair,.6;Bair,.8;Upair,1;,1{Forward 0.5,1;Forward 1,1;Forward 1.5,1;Backward 0.5,1;Backward 1,1;Backward 1.5,1}{1,0,Dashwalk,1}{4,0,Up B OOS,1{Turnaround,1;,1{Angled,1;,1}
