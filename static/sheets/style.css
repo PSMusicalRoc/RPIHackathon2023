@@ -1,5 +1,5 @@
 :root {
-    --footer-height: 100px;
+    --footer-height: 80px;
 
     --go-height: 100px;
     --go-button-height: 80px;
@@ -11,7 +11,7 @@
     --go-button-rounding: 15px;
 
     --header-font-size: 50px;
-    --exercise-font-size: 25px;
+    --exercise-font-size: 30px;
     --normal-font-size: 20px;
 
     --exercise-object-height: 50px;
@@ -47,12 +47,20 @@ h2 {
 }
 
 label {
-    font-size: var(--normal-font-size);
+    font-size: 25px;
 }
 
 input[type="checkbox"] {
     width: 20px;
     height: 20px;
+}
+
+input[type="number"] {
+    font-size: 25px;
+}
+
+input[type="file"] {
+    font-size: 25px;
 }
 
 .add-exercise {
@@ -117,11 +125,28 @@ input[type="checkbox"] {
     margin: 10px auto;
 }
 
+.no-height-limit {
+    height: auto;
+}
+
 .exercise .standard {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: row;
+}
+
+.exercise .dropdown-menu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.exercise .dropdown-hidden {
+    height: 0;
+    display:none;
+    visibility:hidden;
 }
 
 /* .exercise .exercise-dropdown {
@@ -153,7 +178,7 @@ input[type="checkbox"] {
     font-size: var(--exercise-font-size);
     margin: auto 3px;
     font-weight: bold;
-    flex-basis: 70%;
+    flex-basis: 90%;
 }
 
 .exercise button {
@@ -179,6 +204,19 @@ input[type="checkbox"] {
     display: block;
     flex-basis: 10%;
     background-image: url("https://static.vecteezy.com/system/resources/previews/022/448/543/original/illustration-of-colorful-pencil-with-eraser-free-png.png");
+}
+
+.exercise button.pullup {
+    display: block;
+    flex-basis: 10%;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/60/60995.png");
+    transform: rotate(180deg);
+}
+
+.exercise button.dropdown {
+    display: block;
+    flex-basis: 10%;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/60/60995.png");
 }
 
 .exercise button.exclude {
@@ -211,10 +249,11 @@ input[type="checkbox"] {
     flex-basis: 100%;
     flex: 1;
     outline: black 1px left;
-    height: calc(100vh - 20px - var(--footer-height) - var(--go-height));
+    height: calc(100vh - 20px - var(--footer-height) - var(--go-height) - 20px);
     margin-right: 5px;
     background-color: white;
     overflow-y: auto;
+    border-radius: 15px;
 }
 
 .exercise-col {
@@ -223,12 +262,14 @@ input[type="checkbox"] {
     flex-basis: 100%;
     flex: 1;
     margin-left: 5px;
-    height: calc(100vh - 20px - var(--footer-height) - var(--go-height));
+    height: calc(100vh - 20px - var(--footer-height) - var(--go-height) - 20px);
     background-color: teal;
     overflow-y: auto;
+    border-radius: 15px;
 }
 
 .go-partition {
+    margin: 10px auto;
     display: flex;
     flex-direction: column;
     flex-basis: 100%;
@@ -236,6 +277,7 @@ input[type="checkbox"] {
     flex: 1;
     background-color: purple;
     height: var(--go-height);
+    border-radius: 15px;
 }
 
 .go-button {

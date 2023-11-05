@@ -35,6 +35,18 @@
                     <input type="text" id="add-new-exercise" placeholder="New Exercise Name Here...">
                     <button id="add-exercise-button" onclick="addExercise();"></button>
                 </div>
+                <div class="exercise">
+                    <div class="standard">
+                        <p class="name">Test1</p>
+                        <!-- <p style="width: 30%;">Score: 0.5</p> -->
+                        <button class="dropdown" onclick="toggleDropdown(0);"></button>
+                        <button class="pullup" style="display:none;" onclick="toggleDropdown(0);"></button>
+                        <button class="delete"></button>
+                    </div>
+                    <div class="dropdown-hidden">
+                        <p>hi</p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="go-partition">
@@ -46,7 +58,7 @@
             <p>Alex Houck, RPI Class of 2024, Backend</p>
         </footer>
         <script>
-            let test = "Test1:0.2;Test2:0.2;Test5:0.2;";
+            let test = "Jump:Short Hop;Full Hop;:Fastfall:......Test2:Something:Nothing;Here;......";
             populateExercises(test);
         </script>
     </body>

@@ -2,8 +2,18 @@ let global_exercises = [];
 
 const default_score = 0.2;
 
-let delimiter = ":";
-let delimiter_pair = ";";
+let layer_delim = ":";
+let name_delim = ";";
+let action_delim = "......";
+
+class ExerciseDataStruct {
+    constructor(name, layers) {
+        this.name = name;
+
+        // This is an array of arrays of strings
+        this.layers = layers;
+    }
+}
 
 function fileChanged()
 {
@@ -42,72 +52,135 @@ function addExercise()
     document.getElementById("add-new-exercise").value = "";
 }
 
-function generateExerciseString(exercises)
-{
-    let out = "";
-    for (i = 0; i < exercises.length; i+=2)
+function toggleDropdown(index) {
+    let exercise = document.getElementsByClassName("exercise")[index];
+    if (exercise.getElementsByClassName("dropdown-menu").length == 0)
     {
-        out += exercises[i] + delimiter + exercises[i+1] + delimiter_pair;
+        // dropdown menu does not exist at the moment, swap
+        let menu = exercise.getElementsByClassName("dropdown-hidden")[0];
+        menu.classList = "dropdown-menu";
+
+        exercise.getElementsByClassName("dropdown")[0].setAttribute("style", "display:none;");
+        exercise.getElementsByClassName("pullup")[0].setAttribute("style", "");
+
+        exercise.classList = "exercise no-height-limit";
     }
-    return out;
+    else
+    {
+        // dropdown exists, swap
+        let menu = exercise.getElementsByClassName("dropdown-menu")[0];
+        menu.classList = "dropdown-hidden";
+
+        exercise.getElementsByClassName("dropdown")[0].setAttribute("style", "");
+        exercise.getElementsByClassName("pullup")[0].setAttribute("style", "display:none;");
+
+        exercise.classList = "exercise";
+    }
+}
+
+function parseBackendString(str) {
+    let output = [];
+    let actions = str.split(action_delim);
+    if (actions[actions.length - 1].length == 0)
+    {
+        actions.pop();
+    }
+
+    for (i = 0; i < actions.length; i++)
+    {
+        let layers = actions[i].split(layer_delim);
+        if (layers[layers.length - 1].length == 0)
+        {
+            layers.pop();
+        }
+
+        let inlayers = [];
+        
+        for (j = 1; j < layers.length; j++)
+        {
+            let names = layers[j].split(name_delim);
+            if (names[names.length - 1].length == 0)
+            {
+                names.pop();
+            }
+            inlayers.push(names);
+        }
+
+        let exercise = new ExerciseDataStruct(layers[0], inlayers);
+        output.push(exercise);
+    }
+
+    return output;
+}
+
+function generateBackendString(exercises)
+{
+    // reverse of parseBackendString()
+    // make sure to test that each layer has something
+    // in it, otherwise remove it
 }
 
 function populateExercises(input_str)
 {
-    let first_split = input_str.split(delimiter_pair);
-    if (first_split[first_split.length - 1].length == 0)
+    if (global_exercises.length == 0)
     {
-        first_split.pop();
+        global_exercises = parseBackendString(input_str);
     }
-    let exercises = [];
-    for (i = 0; i < first_split.length; i++)
-    {
-        let temp = first_split[i].split(delimiter);
-        exercises = exercises.concat(temp);
-    }
-
-    console.log(exercises);
-    global_exercises = [];
 
     let exerciseColumn = document.getElementsByClassName("exercise-col").item(0);
     let elementsToBeRemoved = document.getElementsByClassName("exercise");
     while (elementsToBeRemoved[0])
         elementsToBeRemoved[0].parentNode.removeChild(elementsToBeRemoved[0]);
 
-    for (e = 0; e < exercises.length; e+=2)
+    for (e = 0; e < global_exercises.length; e++)
     {
+        let data = global_exercises[e];
+
         let exercise = document.createElement("div");
         exercise.setAttribute("class", "exercise");
 
         let standardvis = document.createElement("div");
         standardvis.setAttribute("class", "standard");
 
+        let dropdownvis = document.createElement("div");
+        dropdownvis.setAttribute("class", "dropdown-hidden");
+
+        for (i = 0; i < data.layers.length; i++) {
+            let label = document.createElement("p");
+            label.setAttribute("style", "font-size: 20px");
+            label.innerHTML = "Layer " + (i + 1).toString();
+            dropdownvis.appendChild(label);
+
+            let text = data.layers[i].join(", ");
+            let radio = document.createElement("p");
+            radio.innerHTML = text;
+            dropdownvis.appendChild(radio);
+        }
+
         let ename = document.createElement("p");
-        ename.innerHTML = exercises[e];
+        ename.innerHTML = data.name;
         ename.setAttribute("class", "name");
         standardvis.appendChild(ename);
 
-        let escore = document.createElement("p");
-        escore.innerHTML = "Score: " + exercises[e+1].toString();
-        escore.setAttribute("style", "width: 30%;");
-        standardvis.appendChild(escore);
+        let dropdownbutton = document.createElement("button");
+        dropdownbutton.setAttribute("class", "dropdown");
+        dropdownbutton.setAttribute("onclick", "toggleDropdown(" + e.toString() + ");");
+        standardvis.appendChild(dropdownbutton);
 
-        let editbutton = document.createElement("button");
-        editbutton.setAttribute("class", "edit");
-        standardvis.appendChild(editbutton);
-
-        let excludebutton = document.createElement("button");
-        excludebutton.setAttribute("class", "exclude");
-        standardvis.appendChild(excludebutton);
+        let pullupbutton = document.createElement("button");
+        pullupbutton.setAttribute("class", "pullup");
+        pullupbutton.setAttribute("style", "display:none;");
+        pullupbutton.setAttribute("onclick", "toggleDropdown(" + e.toString() + ");");
+        standardvis.appendChild(pullupbutton);
 
         let deletebutton = document.createElement("button");
         deletebutton.setAttribute("class", "delete");
         standardvis.appendChild(deletebutton);
 
         exercise.appendChild(standardvis);
+        exercise.appendChild(dropdownvis);
 
         exerciseColumn.appendChild(exercise);
     }
-    global_exercises = exercises;
 }
 
