@@ -96,7 +96,7 @@ class Exercise:
 
 
     def toSendString(self, node):
-        s = node.name + ':' + str(node.score) + ';'
+        s = node.name + ';' + str(node.score) + ';:'
         s += self.getChildString(node)
 
         #print(s)
@@ -109,7 +109,7 @@ class Exercise:
         s = ''
         if(len(node.children)>1):
             for c in node.children[:-1]:
-                s += c.name + ':' + str(c.score) + ';'
+                s += c.name + ';' + str(c.score) + ';'
         return s
 
     def toFormatString(self):

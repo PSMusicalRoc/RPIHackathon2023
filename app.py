@@ -43,14 +43,15 @@ def uploadExercises():
             os.remove(os.path.join(os.path.dirname(this_file), 'static/Exercises/Exercises.txt'))
         shutil.copy(file.filename, os.path.join(os.path.dirname(this_file), 'static/Exercises/Exercises.txt'))
 
-        outfile = open(file.filename)
         main_list = Exercise.parse(file.filename)
         s = ''
         for e in main_list:
-            s += e.toSendString(e)
+            s += e.toSendString(e) + '......'
         #do stuff with file here...
 
-        #sending back - should be "excercise:score;exercise:score;exercise:score......"
+        #sending back - should be "excercise;score;exercise;score;:exercise;score......"
+
+        print(s)
 
         return s
 
