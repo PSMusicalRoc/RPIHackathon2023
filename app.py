@@ -33,6 +33,8 @@ def startUp():
 @app.route('/downloadExercises/')
 def downloadExercises():
     #print(f"PATH: {os.path.join(os.path.dirname(this_file), 'logfile.txt')}")
+    global main_list
+    Exercise.write('static/Exercises/Exercises.txt', main_list)
     return send_file(os.path.join(os.path.dirname(this_file), 'static/Exercises/Exercises.txt'), as_attachment=True)
 
 
@@ -101,16 +103,22 @@ def getNextExercise():
         global no_exercises
         global no_iterations
         global index
+        global main_list
         #get previous exercise
         exercise_name = request.form['this_exercise']
         exercise_score = request.form['this_score']
         print('received:', exercise_name, "with", exercise_score)
-        if index >= no_exercises:
-            return '......redirect......' + render_template('resultsScreen.html')
+
         if exercise_score != '':
+            print('updating score')
             score = float(exercise_score)/float(no_iterations)
+            print(main_list[0].score)
             #update this_exercise's score in the data structure
             Exercise.scoring(main_list, exercise_name, score)
+            print(main_list[0].score)
+            print()
+        if index >= no_exercises:
+            return '......redirect......' + render_template('resultsScreen.html')
         #send back string representation of exercise
         send = temp_list[index] + ';' + str(no_iterations)
         index += 1
