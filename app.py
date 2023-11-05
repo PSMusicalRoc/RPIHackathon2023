@@ -46,7 +46,7 @@ def uploadExercises():
         outfile = open(file.filename)
         main_list = Exercise.parse(file.filename)
         for e in main_list:
-            print(''.join(e.toSendStringCaller()))
+            print(e.toSendString(e))
         #do stuff with file here...
 
         #sending back - should be "excercise:score;exercise:score;exercise:score......"
