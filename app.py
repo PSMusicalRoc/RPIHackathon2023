@@ -113,8 +113,10 @@ def getNextExercise():
             print('updating score')
             score = float(exercise_score)/float(no_iterations)
             print(main_list[0].score)
+            print('score:', score)
             #update this_exercise's score in the data structure
             Exercise.scoring(main_list, exercise_name, score)
+            main_list[0].score = 0.0
             print(main_list[0].score)
             print()
         if index >= no_exercises:
